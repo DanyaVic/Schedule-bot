@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+schedules/*.db
+schedules/*.xlsx
+.vscode/
+.idea/
+*.log
