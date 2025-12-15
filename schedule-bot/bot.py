@@ -375,7 +375,7 @@ async def handle_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
 
 
-# ============= ИНИЦИАЛИЗАЦИЯ БОТА =============
+# ИНИЦИАЛИЗАЦИЯ БОТА
 
 async def post_init(app: Application):
     """Инициализация после запуска"""

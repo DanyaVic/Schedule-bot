@@ -6,34 +6,34 @@ from datetime import datetime
 
 load_dotenv()
 
-# Telegram Bot Configuration
+
 TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN', 'YOUR_TOKEN_HERE')
 ADMIN_ID = int(os.getenv('ADMIN_ID', '0'))
 
-# Days of week in Russian
+
 DAYS_RU = ['понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота', 'воскресенье']
 DAYS_SHORT = ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс']
 
-# File paths
+
 SCHEDULE_FILE = 'schedules/schedule.xlsx'
 USERS_DB = 'data/users.db'  # ✅ НОВОЕ
 LOG_FILE = 'logs/bot.log'
 
-# Excel parsing constants
+
 GROUPS_ROW = 17  # Строка где находятся номера групп
 SCHEDULE_START_ROW = 18  # С какой строки начинается расписание
 
-# Notification times (часы)
+
 MORNING_NOTIFICATION_HOUR = 8
 MORNING_NOTIFICATION_MINUTE = 0
 
 EVENING_NOTIFICATION_HOUR = 18
 EVENING_NOTIFICATION_MINUTE = 0
 
-# Время по умолчанию для отправки расписания
+
 DEFAULT_NOTIFICATION_TIME = '08:00'
 
-# Доступные времена для выбора пользователем
+
 AVAILABLE_TIMES = [
     '07:00', '08:00', '09:00', '10:00', '11:00',
     '12:00', '13:00', '14:00', '15:00', '16:00',
@@ -74,7 +74,7 @@ ERROR_NO_SCHEDULE = "❌ К сожалению, сегодня нет занят
 ERROR_GROUP_NOT_FOUND = "❌ Группа не найдена. Пожалуйста, проверьте номер группы."
 ERROR_FILE_NOT_FOUND = "❌ Файл расписания не найден. Свяжитесь с администратором."
 
-# Ensure directories exist
+
 os.makedirs('schedules', exist_ok=True)
 os.makedirs('data', exist_ok=True)
 os.makedirs('logs', exist_ok=True)

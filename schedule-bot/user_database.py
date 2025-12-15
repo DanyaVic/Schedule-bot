@@ -15,7 +15,7 @@ class UserDatabase:
         self._ensure_db_exists()
 
     def _ensure_db_exists(self):
-        """Создает таблицы БД если их нет"""
+        """Создает таблицы БД если их нет или обновляет схему"""
         try:
             conn = sqlite3.connect(self.db_path)
             cursor = conn.cursor()
@@ -31,6 +31,14 @@ class UserDatabase:
                 notification_time TEXT DEFAULT '08:00'
             )
             ''')
+
+            # Миграция: добавляем колонку notification_time если её нет
+            try:
+                cursor.execute('SELECT notification_time FROM users LIMIT 1')
+            except sqlite3.OperationalError:
+                # Колонка не существует, добавляем её
+                logger.info("📦 Миграция: добавляем колонку notification_time")
+                cursor.execute('ALTER TABLE users ADD COLUMN notification_time TEXT DEFAULT "08:00"')
 
             conn.commit()
             conn.close()
@@ -93,7 +101,7 @@ class UserDatabase:
                     'registered': result[2],
                     'updated': result[3],
                     'notifications': bool(result[4]),
-                    'notification_time': result[5]
+                    'notification_time': result[5] if result[5] else '08:00'
                 }
             return None
         except Exception as e:
@@ -190,7 +198,7 @@ class UserDatabase:
             cursor.execute('SELECT notification_time FROM users WHERE user_id = ?', (user_id,))
             result = cursor.fetchone()
             conn.close()
-            return result[0] if result else '08:00'
+            return result[0] if result and result[0] else '08:00'
         except Exception as e:
             logger.error(f"❌ Ошибка получения времени: {str(e)}")
             return '08:00'
@@ -229,7 +237,7 @@ class UserDatabase:
                     'registered': row[2],
                     'updated': row[3],
                     'notifications': bool(row[4]),
-                    'notification_time': row[5]
+                    'notification_time': row[5] if row[5] else '08:00'
                 }
 
             conn.close()
