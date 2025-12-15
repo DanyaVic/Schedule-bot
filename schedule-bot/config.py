@@ -16,7 +16,7 @@ DAYS_SHORT = ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс']
 
 # File paths
 SCHEDULE_FILE = 'schedules/schedule.xlsx'
-USERS_DB = 'data/users.json'
+USERS_DB = 'data/users.db'  # ✅ НОВОЕ
 LOG_FILE = 'logs/bot.log'
 
 # Excel parsing constants
@@ -29,6 +29,17 @@ MORNING_NOTIFICATION_MINUTE = 0
 
 EVENING_NOTIFICATION_HOUR = 18
 EVENING_NOTIFICATION_MINUTE = 0
+
+# Время по умолчанию для отправки расписания
+DEFAULT_NOTIFICATION_TIME = '08:00'
+
+# Доступные времена для выбора пользователем
+AVAILABLE_TIMES = [
+    '07:00', '08:00', '09:00', '10:00', '11:00',
+    '12:00', '13:00', '14:00', '15:00', '16:00',
+    '17:00', '18:00', '19:00', '20:00', '21:00'
+]
+
 
 # Messages
 WELCOME_MESSAGE = """
